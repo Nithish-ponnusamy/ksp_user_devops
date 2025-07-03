@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend:latest
+        image: nithi1230/ksp_backend:latest
         ports:
         - containerPort: 5000
 ---
