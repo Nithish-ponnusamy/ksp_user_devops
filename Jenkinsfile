@@ -1,17 +1,22 @@
 pipeline {
     agent any
+
     environment {
-        REGISTRY = 'your-docker-registry' // e.g. docker.io/yourusername
-        BACKEND_IMAGE = "${REGISTRY}/backend:latest"
-        FRONTEND_IMAGE = "${REGISTRY}/frontend:latest"
+        REGISTRY = 'nithi1230' // 
+        IMAGE_TAG = "${BUILD_NUMBER}"
+        BACKEND_IMAGE = "${REGISTRY}/ksp_backend:${IMAGE_TAG}"
+        FRONTEND_IMAGE = "${REGISTRY}/ksp_src:${IMAGE_TAG}"
     }
+
     stages {
+        
         stage('Checkout') {
             steps {
-                // Checkout code from Git
-                checkout scm
+                git url: 'https://github.com/Nithish-ponnusamy/ksp_user_devops.git', branch: 'main'
+                // If private repo, add: credentialsId: 'your-git-credentials-id'
             }
         }
+
         stage('Build Backend Docker Image') {
             steps {
                 script {
@@ -21,6 +26,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build Frontend Docker Image') {
             steps {
                 script {
@@ -30,7 +36,8 @@ pipeline {
                 }
             }
         }
-        stage('Push Images') {
+
+        stage('Push Images to Registry') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login $REGISTRY -u $DOCKER_USER --password-stdin'
@@ -39,6 +46,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy to Kubernetes') {
             steps {
                 script {
