@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nithi1230/ksp_src:latest
+        image: nithi1230/ksp_src:IMAGE_TAG
         ports:
         - containerPort: 80
 ---
@@ -26,7 +26,6 @@ spec:
   selector:
     app: frontend
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: ClusterIP
+  - port: 80
+    targetPort: 80
+  type: NodePort
