@@ -6,7 +6,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         BACKEND_IMAGE = "${REGISTRY}/ksp_backend:${IMAGE_TAG}"
         FRONTEND_IMAGE = "${REGISTRY}/ksp_src:${IMAGE_TAG}"
-        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+        KUBECONFIG = "/var/lib/jenkins/.kube/config"
     }
 
     stages {
@@ -45,9 +45,24 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f deployment/backend.yaml'
-                sh 'kubectl apply -f deployment/frontend.yaml'
+                echo "🚀 Deploying to Kubernetes..."
+                sh '''
+                    sed -i "s|IMAGE_TAG|${IMAGE_TAG}|g" deployment/backend.yaml
+                    sed -i "s|IMAGE_TAG|${IMAGE_TAG}|g" deployment/frontend.yaml
+
+                    kubectl --kubeconfig=$KUBECONFIG apply -f deployment/backend.yaml
+                    kubectl --kubeconfig=$KUBECONFIG apply -f deployment/frontend.yaml
+                '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Build and Deployment successful!"
+        }
+        failure {
+            echo "❌ Build or Deployment Failed. Check logs!"
         }
     }
 }
