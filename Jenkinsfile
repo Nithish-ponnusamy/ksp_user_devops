@@ -26,15 +26,8 @@ pipeline {
 
         stage('Build Frontend Docker Image') {
             steps {
-<<<<<<< HEAD
-                script {
-                    dir('frontend') {
-                        sh 'docker build -t $FRONTEND_IMAGE .'
-                    }
-=======
-                dir('src') {
+                dir('frontend') {
                     sh 'docker build -t $FRONTEND_IMAGE .'
->>>>>>> f4f0f2c11ebe96813bb037f384f883d919ba3269
                 }
             }
         }
@@ -52,7 +45,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 sh 'kubectl apply -f deployment/backend.yaml'
-                sh 'kubectl apply -f deployment/src.yaml'
+                sh 'kubectl apply -f deployment/frontend.yaml'
             }
         }
     }
