@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: nithi1230/ksp_backend:latest
+        image: nithi1230/ksp_backend:IMAGE_TAG
         ports:
         - containerPort: 5000
 ---
@@ -26,7 +26,6 @@ spec:
   selector:
     app: backend
   ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-  type: ClusterIP
+  - port: 5000
+    targetPort: 5000
+  type: NodePort
