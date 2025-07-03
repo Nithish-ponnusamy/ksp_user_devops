@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         REGISTRY = 'your-docker-registry' // e.g. docker.io/yourusername
-        BACKEND_IMAGE = "${REGISTRY}/backend:latest"
-        FRONTEND_IMAGE = "${REGISTRY}/frontend:latest"
+        BACKEND_IMAGE = "${REGISTRY}/ksp_backend:latest"
+        FRONTEND_IMAGE = "${REGISTRY}/ksp_src:latest"
     }
     stages {
         stage('Checkout') {
