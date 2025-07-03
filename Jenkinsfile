@@ -6,6 +6,7 @@ pipeline {
         IMAGE_TAG = "${BUILD_NUMBER}"
         BACKEND_IMAGE = "${REGISTRY}/ksp_backend:${IMAGE_TAG}"
         FRONTEND_IMAGE = "${REGISTRY}/ksp_src:${IMAGE_TAG}"
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
