@@ -4,17 +4,17 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy only package files first to leverage Docker cache
+# Copy only package.json and package-lock.json first
 COPY package*.json ./
 
-# Install dependencies inside the container
+# Install dependencies inside container
 RUN npm install
 
-# Copy the rest of the application code
+# Copy project files
 COPY . .
 
-# Expose port (adjust based on your backend app)
+# Expose port
 EXPOSE 5000
 
-# Start the backend
+# Start app
 CMD ["npm", "start"]
