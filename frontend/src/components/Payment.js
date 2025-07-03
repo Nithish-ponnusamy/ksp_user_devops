@@ -94,7 +94,7 @@ const Payment = ({
     // For Cash on Delivery
     if (paymentMethod === "cod") {
       try {
-        const response = await axios.post("https://render-user-page.onrender.com/api/orders", orderData, {
+        const response = await axios.post("http://10.111.224.158:5000/api/orders", orderData, {
           timeout: 10000, // Add timeout for better error handling
           headers: {
             'Content-Type': 'application/json'
