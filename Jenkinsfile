@@ -9,7 +9,7 @@ pipeline {
     }
 
     stages {
-
+        
         stage('Checkout') {
             steps {
                 git url: 'https://github.com/Nithish-ponnusamy/ksp_user_devops.git', branch: 'main'
@@ -18,10 +18,8 @@ pipeline {
 
         stage('Build Backend Docker Image') {
             steps {
-                script {
-                    dir('backend') {
-                        sh 'docker build -t $BACKEND_IMAGE .'
-                    }
+                dir('backend') {
+                    sh 'docker build -t $BACKEND_IMAGE .'
                 }
             }
         }
@@ -29,8 +27,7 @@ pipeline {
         stage('Build Frontend Docker Image') {
             steps {
                 script {
-                    // Build frontend from project root, Dockerfile is assumed to be at project root
-                    sh 'docker build -t $FRONTEND_IMAGE -f src/Dockerfile .'
+                    sh 'docker build -t $FRONTEND_IMAGE -f src/Dockerfile src'
                 }
             }
         }
