@@ -30,7 +30,7 @@ pipeline {
         stage('Build Frontend Docker Image') {
             steps {
                 script {
-                    dir('src') {
+                    dir('frontend') {
                         sh 'docker build -t $FRONTEND_IMAGE .'
                     }
                 }
