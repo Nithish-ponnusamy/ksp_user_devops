@@ -139,7 +139,7 @@ const UserProfile = () => {
     }
   ], []); // Empty dependency array since these definitions don't depend on any state or props
 
-  const API_URL = "https://render-user-page.onrender.com";
+  const API_URL = "http://10.111.224.158:5000";
 
   const fetchUserProfile = async () => {
     setLoading(true);
