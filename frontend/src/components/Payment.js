@@ -158,7 +158,7 @@ const Payment = ({
           };
           orderData.paymentResult = paymentResult;
           try {
-            const orderResponse = await axios.post("https://render-user-page.onrender.com/api/orders", orderData, {
+            const orderResponse = await axios.post("http://10.111.224.158:5000/api/orders", orderData, {
               timeout: 10000,
               headers: {
                 'Content-Type': 'application/json'
