@@ -14,7 +14,7 @@ const useProducts = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('https://render-user-page.onrender.com/api/products');
+      const response = await fetch('http://10.111.224.158:5000/api/products');
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
       setProducts(data);
