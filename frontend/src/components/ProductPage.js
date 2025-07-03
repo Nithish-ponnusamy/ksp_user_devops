@@ -357,7 +357,7 @@ const ProductPage = ({ addToCart, isAuthenticated }) => {
       if (!token) return;
 
       setWishlistLoading(true);
-      const response = await axios.get("https://render-user-page.onrender.com/api/user/wishlist", {
+      const response = await axios.get("http://10.111.224.158:5000/api/user/wishlist", {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -390,7 +390,7 @@ const ProductPage = ({ addToCart, isAuthenticated }) => {
       
       if (wishlistItems.has(productId)) {
         // Remove from wishlist
-        await axios.delete(`https://render-user-page.onrender.com/api/user/wishlist/${productId}`, {
+        await axios.delete(`http://10.111.224.158:5000/api/user/wishlist/${productId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         
@@ -401,7 +401,7 @@ const ProductPage = ({ addToCart, isAuthenticated }) => {
         });
       } else {
         // Add to wishlist
-        await axios.post("https://render-user-page.onrender.com/api/user/wishlist", {
+        await axios.post("http://10.111.224.158:5000/api/user/wishlist", {
           productId,
           name: product.name,
           price: product.price,
